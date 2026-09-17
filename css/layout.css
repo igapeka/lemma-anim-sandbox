@@ -95,7 +95,18 @@
   display: flex;
   align-items: center;
   gap: var(--space-300);
-  padding: var(--space-400) var(--space-500) var(--space-200);
+  padding: var(--space-400) var(--space-600) var(--space-200);
+}
+
+/* Кнопка (36px) больше своей ячейки в макете (20px, см. Figma:
+   sidebar-mode-icon) — компенсируем отрицательным margin, чтобы она не
+   раздвигала layout хедера сверх отведённого места и не смещалась при
+   сворачивании/разворачивании сайдбара. flex-shrink:0 — чтобы flex-ряд
+   хедера не сжимал кнопку, пока заголовок рядом ещё не успел схлопнуться
+   (иначе в момент разворачивания сайдбара кнопка на кадр «прыгает»). */
+#sidebar-burger {
+  margin: calc(-1 * var(--space-200));
+  flex-shrink: 0;
 }
 
 .lm-sidebar__title {
@@ -109,11 +120,6 @@
 
 .lm-sidebar.is-collapsed .lm-sidebar__title {
   display: none;
-}
-
-.lm-sidebar.is-collapsed .lm-sidebar__header {
-  padding-left: var(--space-600);
-  padding-right: var(--space-600);
 }
 
 .lm-sidebar__list {
