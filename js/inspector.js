@@ -98,6 +98,7 @@ LS.inspector = (function () {
     if (mode !== 'pick') {
       clearHover();
       deselect();
+      if (LS.mock && LS.mock.hideSidebarTooltip) LS.mock.hideSidebarTooltip();
     }
   }
 
@@ -152,5 +153,9 @@ LS.inspector = (function () {
     document.addEventListener('keydown', onKeydown);
   }
 
-  return { init: init, setMode: setMode, playSelected: playSelected };
+  function getMode() {
+    return mode;
+  }
+
+  return { init: init, setMode: setMode, playSelected: playSelected, getMode: getMode };
 })();

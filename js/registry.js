@@ -46,6 +46,7 @@ LS.registry = (function () {
     'sidebar-item': { label: 'Пункт сайдбара', group: 'Навигация', recommended: ['color-bg'] },
     'sidebar-item-label': { label: 'Подпись пункта сайдбара', group: 'Навигация', recommended: ['fade', 'slide-left'] },
     'sidebar-burger': { label: 'Кнопка сворачивания сайдбара', group: 'Навигация', recommended: ['color-text'] },
+    'sidebar-item-tooltip': { label: 'Тултип пункта сайдбара', group: 'Навигация', recommended: ['fade'], mountControlled: true },
     'header-tab': { label: 'Вкладка в шапке', group: 'Навигация', recommended: ['color-bg'] },
     'header-org': { label: 'Блок организации', group: 'Навигация', recommended: ['color-bg'] },
     'header-org-chevron': { label: 'Шеврон блока организации', group: 'Навигация', recommended: ['rotate'] },

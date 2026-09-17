@@ -128,7 +128,7 @@
                 <svg class="lm-icon" width="20" height="20"><use href="#icon-calendar"/></svg>
                 <span class="lm-sidebar__item-label t-md" data-anim="sidebar-item-label" data-anim-label="Подпись пункта сайдбара" data-anim-group="Навигация">Расписание уроков</span>
               </a>
-              <a href="#" class="lm-nav-item" data-anim="sidebar-item" data-anim-label="Пункт сайдбара" data-anim-group="Навигация">
+              <a href="#" class="lm-nav-item" id="sidebar-item-teachers" data-anim="sidebar-item" data-anim-label="Пункт сайдбара" data-anim-group="Навигация">
                 <svg class="lm-icon" width="20" height="20"><use href="#icon-users"/></svg>
                 <span class="lm-sidebar__item-label t-md" data-anim="sidebar-item-label" data-anim-label="Подпись пункта сайдбара" data-anim-group="Навигация">Управление преподавателями</span>
               </a>
@@ -476,6 +476,16 @@
         <svg class="lm-icon" width="20" height="20"><use href="#icon-close"/></svg>
       </button>
     </div>
+
+    <!-- Тултип пункта сайдбара с обрезающимся текстом — статически привязан
+         к «Управление преподавателями», позиция считается в js/mock.js.
+         Внутри #mock (а не в body), чтобы инспектор мог его выбрать в
+         режиме «Выбор» — position:fixed всё равно не даёт overflow:hidden
+         сайдбара обрезать его. -->
+    <span class="lm-tooltip lm-tooltip--left" role="tooltip" id="sidebar-item-tooltip" data-anim="sidebar-item-tooltip" data-anim-label="Тултип пункта сайдбара" data-anim-group="Навигация" hidden>
+      <svg class="lm-tooltip__tail" width="5" height="12" viewBox="0 0 5 12"><path d="M5 0L0 6L5 12Z" fill="currentColor"/></svg>
+      <span class="lm-tooltip__content t-sm-medium">Управление преподавателями</span>
+    </span>
   </main>
 
   <script src="js/registry.js"></script>

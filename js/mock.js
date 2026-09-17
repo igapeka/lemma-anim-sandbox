@@ -38,6 +38,50 @@ LS.mock = (function () {
     sidebar.classList.toggle('is-collapsed');
   }
 
+  /* ---------- Тултип обрезанного пункта сайдбара ---------- */
+
+  // Статически привязан к одному пункту (id sidebar-item-teachers) —
+  // без общей логики измерения обрезки текста для всех пунктов.
+  var sidebarTooltipEl = null;
+  var sidebarTooltipGen = 0;
+
+  function showSidebarTooltip() {
+    var item = q('#sidebar-item-teachers');
+    if (!item || !sidebarTooltipEl || item.closest('.lm-sidebar.is-collapsed')) return;
+    var rect = item.getBoundingClientRect();
+    sidebarTooltipEl.style.left = rect.right + 'px';
+    sidebarTooltipEl.style.top = (rect.top + rect.height / 2) + 'px';
+    sidebarTooltipEl.style.transform = 'translateY(-50%)';
+    sidebarTooltipGen++;
+    sidebarTooltipEl.hidden = false;
+    LS.anim.enter(sidebarTooltipEl);
+  }
+
+  // force: закрыть, даже если активен режим «Выбор» (используется при
+  // выходе из режима — иначе замороженный тултип остался бы висеть).
+  function hideSidebarTooltip(force) {
+    if (!sidebarTooltipEl || sidebarTooltipEl.hidden) return;
+    // в режиме «Выбор» не закрываем по mouseleave — иначе тултип не
+    // выбрать (курсор неизбежно уходит с пункта, например к тулбару)
+    if (!force && LS.inspector.getMode() === 'pick') return;
+    sidebarTooltipGen++;
+    var gen = sidebarTooltipGen;
+    LS.anim.leave(sidebarTooltipEl, function () {
+      if (gen === sidebarTooltipGen) sidebarTooltipEl.hidden = true;
+    });
+  }
+
+  function initSidebarTooltip() {
+    var item = q('#sidebar-item-teachers');
+    sidebarTooltipEl = q('#sidebar-item-tooltip');
+    if (!item || !sidebarTooltipEl) return;
+
+    item.addEventListener('mouseenter', showSidebarTooltip);
+    item.addEventListener('mouseleave', function () {
+      hideSidebarTooltip(false);
+    });
+  }
+
   /* ---------- Дропдаун организации в шапке ---------- */
 
   var orgDropdownGen = 0;
@@ -377,10 +421,11 @@ LS.mock = (function () {
     toast = q('.lm-toast');
 
     initTheme();
+    initSidebarTooltip();
 
     document.addEventListener('click', onClick);
     document.addEventListener('keydown', onKeydown);
   }
 
-  return { init: init };
+  return { init: init, hideSidebarTooltip: function () { hideSidebarTooltip(true); } };
 })();

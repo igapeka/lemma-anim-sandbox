@@ -230,6 +230,11 @@
 #mock.is-picking [data-anim] {
   cursor: pointer;
 }
+/* Тултип обычно pointer-events:none (не мешает макету под собой), но
+   в режиме «Выбор» его нужно кликать, чтобы настроить анимацию. */
+#mock.is-picking .lm-tooltip {
+  pointer-events: auto;
+}
 
 .is-anim-hover {
   outline: 2px solid var(--tb-accent);

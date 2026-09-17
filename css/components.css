@@ -283,6 +283,42 @@
   white-space: nowrap;
 }
 
+/* Тултип для пункта сайдбара с обрезающимся текстом — привязан статически
+   к конкретному пункту («Управление преподавателями»), без общей логики
+   позиционирования/измерения обрезки. Позиция (top/left) выставляется в
+   js/mock.js по getBoundingClientRect() пункта; position:fixed — чтобы
+   не обрезаться overflow:hidden сайдбара. Цвет инвертирован относительно
+   темы макета (по Figma): в светлой теме тултип тёмный, в тёмной — светлый. */
+.lm-tooltip {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  color: #1e1e22;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.lm-tooltip__tail {
+  flex-shrink: 0;
+}
+
+.lm-tooltip__content {
+  padding: var(--space-200) var(--space-300);
+  border-radius: var(--radius-200);
+  background: #1e1e22;
+  color: #ffffff;
+}
+
+:root[data-theme='dark'] .lm-tooltip {
+  color: #ffffff;
+}
+
+:root[data-theme='dark'] .lm-tooltip__content {
+  background: #ffffff;
+  color: #0a0b0f;
+}
+
 /* ===== Таблица классов ===== */
 
 .lm-table {
