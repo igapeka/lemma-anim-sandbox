@@ -1,0 +1,151 @@
+:root {
+  /* Типографика */
+  --font-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'Roboto Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Модуль = 4px */
+  --module-50: 2px;   --module-100: 4px;  --module-150: 6px;  --module-200: 8px;
+  --module-250: 10px; --module-300: 12px; --module-350: 14px; --module-400: 16px;
+  --module-500: 20px; --module-600: 24px; --module-700: 28px; --module-800: 32px;
+
+  /* Отступы */
+  --space-0: 0;      --space-50: 2px;   --space-100: 4px;  --space-150: 6px;
+  --space-200: 8px;  --space-250: 10px; --space-300: 12px; --space-400: 16px;
+  --space-500: 20px; --space-600: 24px;
+
+  /* Скругления */
+  --radius-200: 8px;
+  --radius-component: 8px;
+  --radius-full: 999px;
+
+  /* Layer */
+  --layer-1: #ffffff;
+  --layer-1-alt: #f9fafe;
+  --layer-2: #ffffff;
+  --layer-2-alt: #f9fafe;
+  --layer-background: #f3f4f9;
+  --layer-neutral-soft: #16215817;
+  --layer-neutral-solid: #73757e;
+  --layer-accent-solid: #496be8;
+  --layer-accent-soft: #0a49f61c;
+  --layer-overlay: #09090b7a;
+
+  /* Content */
+  --content-primary: #0a0b0f;
+  --content-secondary: #0a0b0fa6;
+  --content-on-solid: #ffffff;
+  --content-accent: #3d5de0;
+  --content-negative: #ce1d2a;
+
+  /* Icon */
+  --icon-accent-solid: #597bec;
+
+  /* Border */
+  --border-control: #d5d6dc;
+  --border-on-layer-1: #eaebf0;
+  --border-on-layer-2: #eaebf0;
+  --border-accent-solid: #3d5de0;
+  --border-accent-soft: #034aff4f;
+
+  /* Interactive — состояния (см. Приложение H) */
+  --layer-2-hover: #f9fafe;
+  --layer-2-pressed: #f3f4f9;
+  --layer-accent-solid-hover: #597bec;
+  --layer-accent-solid-pressed: #3d5de0;
+  --layer-neutral-subtle-hover: #16215817;
+  --content-secondary-hover: #0a0b0f;
+  --content-secondary-pressed: #0a0b0fa6;
+  --content-accent-hover: #597bec;
+  --content-accent-pressed: #2940c3;
+
+  /* Тематические (аватары, иконки статусов) */
+  --cian-day-700: #2ebebc;   --cian-day-400: #87e5e3;
+  --orange-day-700: #fe8e4d; --orange-day-400: #ffcbad;
+  --yellow-day-700: #e39f00; --yellow-day-400: #fbd317;
+  --blue-day-700: #6eb1ef;   --blue-day-400: #b9daf7;
+
+  /* Статусные (тосты) */
+  --layer-positive-solid: #01881a;
+
+  /* Тени */
+  --shadow-bottom-xs: 0 1px 2px 0 #16215817;
+  --shadow-bottom-s: 0 1px 2px 0 #16215817, 0 1px 3px 0 #16215817;
+  --shadow-bottom-l: 0 10px 15px -3px #16215817, 0 4px 6px -2px #16215817;
+  --shadow-right-xs: 1px 0 2px 0 #16215817;
+  --shadow-left-xxl: -25px 4px 50px -12px #07102a3b, -4px 2px 6px 0 #16215817;
+  --shadow-inner-m: inset 0 2.5px 4px 0 #07102a3b;
+  --shadow-inner-xs: inset 0 1px 2px 0 #16215817;
+
+  /* Размеры макета */
+  --size-header: 64px;
+  --size-subheader: 68px;
+  --size-sidebar-open: 264px;
+  --size-sidebar-closed: 68px;
+  --size-screen: 1344px;
+  --size-row-class: 60px;
+  --size-row-student: 52px;
+  --size-control-sm: 36px;
+  --size-sidepage: 448px;
+
+  /* Дополнительные размеры компонентов макета (из Figma, единичные) */
+  --size-avatar: 32px;
+  --size-logo: 40px;
+  --size-header-icon-btn: 48px;
+  --size-col-students: 300px;
+  --size-col-actions: 120px;
+  --size-dialog: 508px;
+  --size-dialog-icon: 40px;
+  --size-row-indent: 44px;
+  --size-row-indent-inline: 32px;
+  --size-chevron: 24px;
+  --size-input-floating-w: 240px;
+  --size-input-medium: 40px;
+  --size-toolbar: 56px;
+}
+
+/* Тёмная тема макета — значения выгружены из Figma, секция
+   «Песочница B2B Тёмная». Переключается атрибутом data-theme на <html>. */
+:root[data-theme='dark'] {
+  --layer-1: #1e1e22;
+  --layer-1-alt: #16171a;
+  --layer-2: #2d2d32;
+  --layer-2-alt: #1e1e22;
+  --layer-background: #09090b;
+  --layer-neutral-soft: #dbdbf11a;
+  --layer-neutral-solid: #6b6c75;
+  --layer-accent-solid: #4061e4;
+  --layer-accent-soft: #344fc761;
+  --layer-overlay: #00000099;
+
+  --content-primary: #fdfeff;
+  --content-secondary: #fdfeff8f;
+  --content-on-solid: #ffffff;
+  --content-accent: #85a2f4;
+  --content-negative: #ff7c83;
+
+  --icon-accent-solid: #7191f1;
+
+  --border-control: #54555c;
+  --border-on-layer-1: #2d2d32;
+  --border-on-layer-2: #404146;
+  --border-accent-solid: #85a2f4;
+  --border-accent-soft: #3d5dc994;
+
+  --layer-2-hover: #36373c;
+  --layer-2-pressed: #2d2d32;
+  --layer-accent-solid-hover: #4e70e9;
+  --layer-accent-solid-pressed: #3955be;
+  --layer-neutral-subtle-hover: #dbdbf11a;
+  --content-secondary-hover: #fdfeff;
+  --content-secondary-pressed: #fdfeff8f;
+  --content-accent-hover: #9ab4f7;
+  --content-accent-pressed: #4e70e9;
+
+  --shadow-bottom-xs: 0 1px 2px 0 #00000066;
+  --shadow-bottom-s: 0 1px 2px 0 #00000066, 0 1px 3px 0 #00000066;
+  --shadow-bottom-l: 0 10px 15px -3px #00000066, 0 4px 6px -2px #00000066;
+  --shadow-right-xs: 1px 0 2px 0 #00000066;
+  --shadow-left-xxl: -25px 4px 50px -12px #00000080, -4px 2px 6px 0 #00000066;
+  --shadow-inner-m: inset 0 2.5px 4px 0 #00000080;
+  --shadow-inner-xs: inset 0 1px 2px 0 #00000066;
+}

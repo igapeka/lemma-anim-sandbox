@@ -1,0 +1,5 @@
+/* Раскрытие блока класса — без анимации по высоте, просто показ/скрытие
+   по классу is-open на строке (js/mock.js, toggleRow). */
+.lm-row:not(.is-open) .lm-row__expanded {
+  display: none;
+}

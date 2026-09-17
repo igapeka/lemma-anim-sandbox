@@ -1,0 +1,191 @@
+.lm-sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.lm-icon {
+  display: block;
+  flex-shrink: 0;
+}
+
+.lm-screen {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--layer-background);
+}
+
+/* Шапка сервиса */
+.lm-header {
+  height: var(--size-header);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-500);
+  background: var(--layer-1);
+  box-shadow: var(--shadow-bottom-xs);
+  position: relative;
+  z-index: 1;
+}
+
+.lm-header__brand-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--module-800);
+  min-width: 0;
+}
+
+.lm-header__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-300);
+}
+
+.lm-header__logo {
+  width: var(--size-logo);
+  height: var(--size-logo);
+  border-radius: var(--radius-200);
+  background: var(--layer-neutral-soft);
+  flex-shrink: 0;
+}
+
+.lm-header__nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-100);
+}
+
+.lm-header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-500);
+  flex-shrink: 0;
+}
+
+/* Основная область под шапкой: сайдбар + контент */
+.lm-body {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  min-height: 0;
+}
+
+/* Сайдбар */
+.lm-sidebar {
+  width: var(--size-sidebar-open);
+  flex-shrink: 0;
+  background: var(--layer-1);
+  border-right: 1px solid var(--border-on-layer-1);
+  box-shadow: var(--shadow-right-xs);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.lm-sidebar.is-collapsed {
+  width: var(--size-sidebar-closed);
+}
+
+.lm-sidebar__header {
+  height: 44px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-300);
+  padding: var(--space-400) var(--space-500) var(--space-200);
+}
+
+.lm-sidebar__title {
+  color: var(--content-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lm-sidebar.is-collapsed .lm-sidebar__title {
+  display: none;
+}
+
+.lm-sidebar.is-collapsed .lm-sidebar__header {
+  padding-left: var(--space-600);
+  padding-right: var(--space-600);
+}
+
+.lm-sidebar__list {
+  flex: 1;
+  padding: var(--space-200) var(--space-300) var(--space-300);
+  overflow: hidden;
+}
+
+.lm-sidebar__group-label {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  padding: var(--space-200) var(--module-100) var(--space-200) var(--space-300);
+  color: var(--content-primary);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* В свёрнутом сайдбаре подпись группы уступает место тонкому разделителю —
+   высота блока не меняется, чтобы пункты списка не сдвигались. */
+.lm-sidebar.is-collapsed .lm-sidebar__group-label {
+  padding-left: 0;
+  padding-right: 0;
+  justify-content: center;
+}
+
+.lm-sidebar.is-collapsed .lm-sidebar__group-label-text {
+  display: none;
+}
+
+.lm-sidebar__group-label::after {
+  content: '';
+  display: none;
+  width: 100%;
+  border-top: 1px solid var(--border-on-layer-1);
+}
+
+.lm-sidebar.is-collapsed .lm-sidebar__group-label::after {
+  display: block;
+}
+
+.lm-sidebar__nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--module-50);
+}
+
+.lm-sidebar.is-collapsed .lm-sidebar__item-label {
+  display: none;
+}
+
+/* Правая колонка: сабхедер + контент */
+.lm-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.lm-subheader {
+  height: var(--size-subheader);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-500);
+  background: var(--layer-1);
+  border-bottom: 1px solid var(--border-on-layer-1);
+}
+
+.lm-content {
+  flex: 1;
+  padding: var(--space-500);
+  overflow: auto;
+}

@@ -1,0 +1,395 @@
+/* Служебный UI песочницы — не часть дизайн-системы макета. Тема тулбара всегда
+   противоположна теме макета, чтобы служебный слой не сливался с ним. */
+
+:root {
+  --tb-bg: #1b1c20;
+  --tb-bg-raised: #232429;
+  --tb-bg-sunken: #141518;
+  --tb-border: #34353c;
+  --tb-text: #f2f3f5;
+  --tb-text-secondary: #9a9ba5;
+  --tb-accent: #5b7cfa;
+  --tb-accent-hover: #7b98ff;
+  --tb-on-accent: #ffffff;
+  --tb-danger: #ff6b6b;
+}
+
+/* Макет переключился на тёмную тему — тулбар становится светлым. */
+:root[data-theme='dark'] {
+  --tb-bg: #f5f6f8;
+  --tb-bg-raised: #ffffff;
+  --tb-bg-sunken: #e7e8ec;
+  --tb-border: #d5d6dc;
+  --tb-text: #0a0b0f;
+  --tb-text-secondary: #6b6c75;
+  --tb-accent: #3d5de0;
+  --tb-accent-hover: #597bec;
+  --tb-on-accent: #ffffff;
+  --tb-danger: #ce1d2a;
+}
+
+.lm-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--tb-bg);
+  border-bottom: 1px solid var(--tb-border);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+}
+
+.lm-toolbar__bar {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  gap: var(--space-300);
+  padding: 0 var(--space-400);
+}
+
+.lm-toolbar__segment {
+  display: flex;
+  gap: var(--space-50);
+  padding: var(--space-50);
+  background: var(--tb-bg-sunken);
+  border-radius: var(--radius-200);
+}
+
+.lm-segment-btn {
+  height: 32px;
+  padding: 0 var(--space-300);
+  border: none;
+  border-radius: var(--radius-200);
+  background: transparent;
+  color: var(--tb-text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.lm-segment-btn.is-active {
+  background: var(--tb-bg-raised);
+  color: var(--tb-text);
+}
+
+.lm-toolbar__divider {
+  width: 1px;
+  height: 24px;
+  background: var(--tb-border);
+  flex-shrink: 0;
+}
+
+.lm-toolbar__selected {
+  display: flex;
+  flex-direction: column;
+  min-width: 160px;
+  color: var(--tb-text);
+}
+.lm-toolbar__selected-group {
+  color: var(--tb-text-secondary);
+}
+
+.lm-toolbar__play,
+.lm-toolbar__slowmo,
+.lm-toolbar__params,
+.lm-toolbar__reset {
+  height: 32px;
+  padding: 0 var(--space-300);
+  border-radius: var(--radius-200);
+  border: 1px solid var(--tb-border);
+  background: var(--tb-bg-raised);
+  color: var(--tb-text);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.lm-toolbar__play:disabled {
+  color: var(--tb-text-secondary);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+.lm-toolbar__play:not(:disabled):hover,
+.lm-toolbar__slowmo:hover,
+.lm-toolbar__params:hover,
+.lm-toolbar__reset:hover {
+  background: var(--tb-border);
+}
+.lm-toolbar__slowmo.is-active {
+  background: var(--tb-accent);
+  border-color: var(--tb-accent);
+  color: var(--tb-on-accent);
+}
+.lm-toolbar__slowmo.is-active:hover {
+  background: var(--tb-accent-hover);
+  border-color: var(--tb-accent-hover);
+}
+
+.lm-toolbar__spacer {
+  flex: 1;
+}
+
+.lm-toolbar__panel {
+  border-top: 1px solid var(--tb-border);
+  padding: var(--space-400);
+  background: var(--tb-bg-sunken);
+}
+
+.lm-layer-section + .lm-layer-section {
+  margin-top: var(--space-400);
+  padding-top: var(--space-400);
+  border-top: 1px solid var(--tb-border);
+}
+
+.lm-layer-section-title {
+  color: var(--tb-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-200);
+}
+
+.lm-layer-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-200);
+  margin-bottom: var(--space-300);
+}
+
+.lm-layer-empty {
+  color: var(--tb-text-secondary);
+}
+
+.lm-layer-row {
+  display: grid;
+  grid-template-columns: 1.2fr 1.2fr 1.4fr 0.9fr 0.9fr auto;
+  gap: var(--space-200);
+  align-items: end;
+  padding: var(--space-200);
+  background: var(--tb-bg-raised);
+  border: 1px solid var(--tb-border);
+  border-radius: var(--radius-200);
+}
+
+.lm-layer-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-100);
+  min-width: 0;
+}
+
+.lm-layer-field-label {
+  color: var(--tb-text-secondary);
+}
+
+.lm-layer-field select,
+.lm-layer-field input {
+  height: 32px;
+  padding: 0 var(--space-200);
+  border-radius: var(--radius-200);
+  border: 1px solid var(--tb-border);
+  background: var(--tb-bg-sunken);
+  color: var(--tb-text);
+  font-size: 13px;
+  min-width: 0;
+}
+
+.lm-layer-field input.is-invalid {
+  border-color: var(--tb-danger);
+}
+
+.lm-layer-remove {
+  height: 32px;
+  width: 32px;
+  border-radius: var(--radius-200);
+  border: 1px solid var(--tb-border);
+  background: var(--tb-bg-sunken);
+  color: var(--tb-text-secondary);
+  cursor: pointer;
+}
+.lm-layer-remove:hover {
+  background: var(--tb-border);
+  color: var(--tb-text);
+}
+
+.lm-toolbar__add-layer {
+  height: 32px;
+  padding: 0 var(--space-300);
+  border: none;
+  border-radius: var(--radius-200);
+  background: transparent;
+  color: var(--tb-accent);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.lm-toolbar__add-layer:hover {
+  color: var(--tb-accent-hover);
+}
+
+/* ---------- Режим «Выбор»: подсветка и выделение элементов макета ---------- */
+
+#mock.is-picking {
+  cursor: crosshair;
+}
+#mock.is-picking [data-anim] {
+  cursor: pointer;
+}
+
+.is-anim-hover {
+  outline: 2px solid var(--tb-accent);
+  outline-offset: -2px;
+}
+
+.is-anim-selected {
+  outline: 2px solid var(--tb-accent);
+  outline-offset: -2px;
+}
+
+/* ---------- Модалка «Параметры» (тот же тёмный служебный слой) ---------- */
+
+.lm-export-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1200;
+}
+
+.lm-export-modal {
+  position: fixed;
+  top: var(--space-600);
+  left: var(--space-600);
+  right: var(--space-600);
+  bottom: var(--space-600);
+  background: var(--tb-bg);
+  border: 1px solid var(--tb-border);
+  border-radius: var(--radius-200);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  z-index: 1201;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.lm-export-header {
+  height: 56px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-400);
+  border-bottom: 1px solid var(--tb-border);
+}
+
+.lm-export-tabs {
+  display: flex;
+  gap: var(--space-100);
+}
+
+.lm-export-tab {
+  height: 32px;
+  padding: 0 var(--space-400);
+  border: none;
+  border-radius: var(--radius-200);
+  background: transparent;
+  color: var(--tb-text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.lm-export-tab.is-active {
+  background: var(--tb-bg-raised);
+  color: var(--tb-text);
+}
+
+.lm-export-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-200);
+}
+
+.lm-export-download,
+.lm-export-upload {
+  height: 32px;
+  padding: 0 var(--space-300);
+  border-radius: var(--radius-200);
+  border: 1px solid var(--tb-border);
+  background: transparent;
+  color: var(--tb-text);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.lm-export-download:hover,
+.lm-export-upload:hover {
+  background: var(--tb-bg-raised);
+}
+
+.lm-export-copy {
+  height: 32px;
+  padding: 0 var(--space-300);
+  border-radius: var(--radius-200);
+  border: none;
+  background: var(--tb-accent);
+  color: var(--tb-on-accent);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.lm-export-copy:hover {
+  background: var(--tb-accent-hover);
+}
+
+.lm-export-close {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: var(--radius-200);
+  background: transparent;
+  color: var(--tb-text-secondary);
+  cursor: pointer;
+}
+.lm-export-close:hover {
+  background: var(--tb-bg-raised);
+  color: var(--tb-text);
+}
+
+.lm-export-body {
+  flex: 1;
+  overflow: auto;
+  padding: var(--space-500);
+}
+
+.lm-export-pre {
+  color: var(--tb-text);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 20px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  user-select: text;
+}
+
+.lm-export-empty {
+  color: var(--tb-text-secondary);
+}
+
+.lm-export-toast {
+  position: absolute;
+  bottom: var(--space-500);
+  right: var(--space-500);
+  padding: var(--space-200) var(--space-400);
+  border-radius: var(--radius-200);
+  background: var(--tb-accent);
+  color: var(--tb-on-accent);
+  font-size: 13px;
+}
+
+.lm-inspector-badge {
+  position: fixed;
+  z-index: 1100;
+  padding: var(--space-100) var(--space-200);
+  border-radius: var(--radius-200);
+  background: var(--tb-accent);
+  color: var(--tb-on-accent);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  pointer-events: none;
+  white-space: nowrap;
+}
