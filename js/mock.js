@@ -38,6 +38,13 @@ LS.mock = (function () {
     sidebar.classList.toggle('is-collapsed');
   }
 
+  /* ---------- Панель якорной навигации: сворачивание ---------- */
+
+  function toggleAnchorNav() {
+    var anchorNav = q('.lm-anchor-nav');
+    anchorNav.classList.toggle('is-collapsed');
+  }
+
   /* ---------- Тултип обрезанного пункта сайдбара ---------- */
 
   // Статически привязан к одному пункту (id sidebar-item-teachers) —
@@ -372,6 +379,9 @@ LS.mock = (function () {
     switch (role) {
       case 'toggle-sidebar':
         toggleSidebar();
+        break;
+      case 'toggle-anchor-nav':
+        toggleAnchorNav();
         break;
       case 'open-save-dialog':
         openDialog();

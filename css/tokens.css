@@ -103,6 +103,7 @@
   --size-input-medium: 40px;
   --size-toolbar: 56px;
   --size-anchor-nav: 260px;
+  --size-anchor-nav-closed: 52px;
 }
 
 /* Тёмная тема макета — значения выгружены из Figma, секция

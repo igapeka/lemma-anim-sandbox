@@ -10,12 +10,27 @@
   flex-shrink: 0;
 }
 
-/* height (не min-height): экран никогда не растягивается сверх вьюпорта,
-   иначе body начинает скроллиться сам, вместо .lm-content внутри него. */
+/* <main id="mock"> — обычный блочный элемент между body (flex) и .lm-screen.
+   Без flex:1 здесь он не тянет свою высоту от body, и .lm-screen ниже не
+   получает ограничение по высоте — контент перестаёт помещаться и не
+   скроллится. min-height:0 не даёт этому блоку раздуться под контент. */
+#mock {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+/* flex:1 (не height:100vh): экран занимает весь вьюпорт за вычетом
+   .lm-toolbar, который стоит перед ним в потоке body (см. base.css).
+   min-height:0 нужен, чтобы flex-контейнер не растягивался под контент и
+   не выталкивал страницу в скролл — иначе скроллится body целиком, вместо
+   .lm-content внутри него. */
 .lm-screen {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  flex: 1;
+  min-height: 0;
   overflow: hidden;
   background: var(--layer-background);
 }
@@ -180,6 +195,7 @@
   display: flex;
   flex-direction: column;
   min-width: 0;
+  min-height: 0;
 }
 
 .lm-subheader {
@@ -212,6 +228,21 @@
   flex-direction: column;
   gap: var(--space-600);
   overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-on-layer-1) transparent;
+}
+
+.lm-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.lm-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.lm-content::-webkit-scrollbar-thumb {
+  background: var(--border-on-layer-1);
+  border-radius: var(--radius-200);
 }
 
 .lm-anchor-section__title {
@@ -226,9 +257,21 @@
   border-left: 1px solid var(--border-on-layer-1);
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+}
+
+.lm-anchor-nav.is-collapsed {
+  width: var(--size-anchor-nav-closed);
+  align-items: flex-end;
 }
 
 .lm-anchor-nav__header {
+  height: 52px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-100);
   padding: var(--space-400);
   border-bottom: 1px solid var(--border-on-layer-1);
   background: var(--layer-1-alt);
@@ -236,12 +279,34 @@
 
 .lm-anchor-nav__title {
   color: var(--content-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lm-anchor-nav.is-collapsed .lm-anchor-nav__title {
+  display: none;
+}
+
+/* Кнопка (36px) больше своей ячейки в макете (20px, см. Figma:
+   lm-anchor-nav-header-button-wrap) — та же проблема, что и с бургером
+   сайдбара (#sidebar-burger): компенсируем отрицательным margin, чтобы
+   кнопка не раздвигала header сверх отведённого места и не «прыгала» при
+   сворачивании/разворачивании панели. flex-shrink:0 — чтобы кнопку не
+   сжимало, пока заголовок ещё не успел схлопнуться. */
+.lm-anchor-nav__toggle {
+  margin: calc(-1 * var(--space-200));
+  flex-shrink: 0;
 }
 
 .lm-anchor-nav__list {
   display: flex;
   flex-direction: column;
   padding: var(--space-200) 0;
+}
+
+.lm-anchor-nav.is-collapsed .lm-anchor-nav__list {
+  display: none;
 }
 
 .lm-anchor-nav__item {

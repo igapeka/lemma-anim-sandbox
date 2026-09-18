@@ -140,6 +140,8 @@ LS.inspector = (function () {
       flipClass(document.querySelector('.lm-sidebar'), 'is-collapsed', maxDuration);
     } else if (animId === 'sidebar-item') {
       flipClass(selectedEl, 'is-selected', maxDuration);
+    } else if (animId === 'anchor-nav' || animId === 'anchor-nav-toggle') {
+      flipClass(document.querySelector('.lm-anchor-nav'), 'is-collapsed', maxDuration);
     }
     // для остальных стейт-переходов (hover/focus кнопок и полей) готового
     // класса-состояния нет — «Проиграть» для них пока не демонстрирует эффект

@@ -37,6 +37,7 @@
       <symbol id="icon-check-circle" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M6.5 10.2l2.3 2.3L13.7 7.3" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
       <symbol id="icon-sun" viewBox="0 0 20 20"><circle cx="10" cy="10" r="4" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M10 1.5v2M10 16.5v2M18.5 10h-2M3.5 10h-2M15.9 4.1l-1.4 1.4M5.5 14.5l-1.4 1.4M15.9 15.9l-1.4-1.4M5.5 5.5L4.1 4.1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
       <symbol id="icon-moon" viewBox="0 0 20 20"><path d="M17 11.5A7.5 7.5 0 018.5 3 7.5 7.5 0 1017 11.5z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="round"/></symbol>
+      <symbol id="icon-list" viewBox="0 0 20 20"><circle cx="4" cy="6" r="1.2" fill="currentColor"/><circle cx="4" cy="10" r="1.2" fill="currentColor"/><circle cx="4" cy="14" r="1.2" fill="currentColor"/><path d="M8 6h8M8 10h8M8 14h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
     </defs>
   </svg>
 
@@ -682,6 +683,9 @@
           <nav class="lm-anchor-nav" data-anim="anchor-nav" data-anim-label="Панель якорной навигации" data-anim-group="Навигация" aria-label="Навигация по странице">
             <div class="lm-anchor-nav__header">
               <span class="t-md-semibold lm-anchor-nav__title">На этой странице</span>
+              <button type="button" class="lm-btn lm-btn--icon lm-btn--ghost-neutral lm-anchor-nav__toggle" data-role="toggle-anchor-nav" data-anim="anchor-nav-toggle" data-anim-label="Кнопка сворачивания якорной навигации" data-anim-group="Навигация" aria-label="Свернуть панель навигации">
+                <svg class="lm-icon" width="20" height="20"><use href="#icon-list"/></svg>
+              </button>
             </div>
             <div class="lm-anchor-nav__list">
               <a href="#anchor-nachalnaya" class="lm-anchor-nav__item t-sm-medium is-active" data-anchor-target="anchor-nachalnaya" data-anim="anchor-nav-item" data-anim-label="Пункт якорной навигации" data-anim-group="Навигация">Начальная школа</a>

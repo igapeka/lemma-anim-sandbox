@@ -18,7 +18,14 @@ body {
   height: 100%;
 }
 
+/* Тулбар песочницы — sticky, а не fixed (см. .lm-toolbar), поэтому занимает
+   место в потоке body. display:flex+column здесь заставляет .lm-screen
+   (flex: 1) отдать ему свою высоту, а не расти сверх окна — иначе
+   скроллится вся страница на высоту тулбара вместо одного .lm-content. */
 body {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   font-family: var(--font-base);
   background: var(--layer-background);
   color: var(--content-primary);
