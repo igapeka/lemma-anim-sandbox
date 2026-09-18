@@ -116,12 +116,74 @@ LS.anim = (function () {
     setTimeout(done, total * timeFactor());
   }
 
+  // cubic-bezier(x1,y1,x2,y2) → функция t(0..1) → прогресс(0..1). Решение
+  // ищем бинарным поиском по x (t — параметр кривой, не сам прогресс).
+  function bezierEasing(x1, y1, x2, y2) {
+    function bezierAt(t, a, b) {
+      var mt = 1 - t;
+      return 3 * mt * mt * t * a + 3 * mt * t * t * b + t * t * t;
+    }
+    return function (x) {
+      var t = x;
+      for (var i = 0; i < 8; i++) {
+        var xEst = bezierAt(t, x1, x2) - x;
+        if (Math.abs(xEst) < 1e-4) break;
+        var d = (bezierAt(t + 1e-4, x1, x2) - bezierAt(t - 1e-4, x1, x2)) / 2e-4;
+        if (Math.abs(d) < 1e-6) break;
+        t -= xEst / d;
+        t = Math.min(1, Math.max(0, t));
+      }
+      return bezierAt(t, y1, y2);
+    };
+  }
+
+  // 'cubic-bezier(a, b, c, d)' → easing-функция. Именованные keyword'ы вида
+  // 'ease'/'linear' в реестре не встречаются (см. registry.js: все easings
+  // заданы как cubic-bezier), так что других форм не поддерживаем.
+  function parseEasing(value) {
+    var m = /cubic-bezier\(\s*([\d.\-]+)\s*,\s*([\d.\-]+)\s*,\s*([\d.\-]+)\s*,\s*([\d.\-]+)\s*\)/.exec(value || '');
+    if (!m) return function (x) { return x; };
+    return bezierEasing(parseFloat(m[1]), parseFloat(m[2]), parseFloat(m[3]), parseFloat(m[4]));
+  }
+
+  // CSS transition не умеет анимировать scrollTop — крутим его вручную по
+  // duration/easing текущих слоёв animId (настраиваются в тулбаре как у
+  // любой другой анимации). Слой без duration (или отсутствие слоёв вовсе)
+  // — мгновенный прыжок, как раньше без анимации.
+  function animateScroll(el, top, animId) {
+    var layers = LS.state.getLayers(animId);
+    var layer = layers[0];
+    var duration = layer ? layer.duration * timeFactor() : 0;
+    var delay = layer ? (layer.delay || 0) * timeFactor() : 0;
+    var from = el.scrollTop;
+    var distance = top - from;
+    if (!duration || !distance) {
+      el.scrollTop = top;
+      return;
+    }
+    var ease = parseEasing(layer.easing);
+    var start = null;
+    function step(ts) {
+      if (start === null) start = ts;
+      var elapsed = ts - start - delay;
+      if (elapsed < 0) {
+        requestAnimationFrame(step);
+        return;
+      }
+      var progress = Math.min(1, elapsed / duration);
+      el.scrollTop = from + distance * ease(progress);
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
   return {
     buildTransition: buildTransition,
     apply: apply,
     applyAll: applyAll,
     enter: enter,
     leave: leave,
+    animateScroll: animateScroll,
     setSlowMotion: setSlowMotion,
     isSlowMotion: isSlowMotion,
     getTimeFactor: getTimeFactor,

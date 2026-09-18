@@ -140,7 +140,7 @@ LS.mock = (function () {
     var target = document.getElementById(id);
     if (!scrollEl || !target) return;
     var targetTop = target.offsetTop - scrollEl.offsetTop;
-    scrollEl.scrollTo({ top: targetTop, behavior: 'smooth' });
+    LS.anim.animateScroll(scrollEl, targetTop, 'anchor-scroll');
     setActiveAnchor(id);
   }
 
