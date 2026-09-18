@@ -52,6 +52,8 @@ LS.registry = (function () {
     'header-org-chevron': { label: 'Шеврон блока организации', group: 'Навигация', recommended: ['rotate'] },
     'header-org-dropdown': { label: 'Список организаций', group: 'Навигация', recommended: ['fade', 'slide-down'], mountControlled: true },
     'header-org-item': { label: 'Пункт списка организаций', group: 'Навигация', recommended: ['color-bg'] },
+    'anchor-nav': { label: 'Панель якорной навигации', group: 'Навигация', recommended: ['fade'] },
+    'anchor-nav-item': { label: 'Пункт якорной навигации', group: 'Навигация', recommended: ['color-bg', 'color-text'] },
 
     'table-row': { label: 'Строка класса', group: 'Таблица', recommended: ['color-bg'] },
     'row-chevron': { label: 'Шеврон раскрытия', group: 'Таблица', recommended: ['rotate'] },

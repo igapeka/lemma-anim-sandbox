@@ -26,6 +26,7 @@
   --layer-background: #f3f4f9;
   --layer-neutral-soft: #16215817;
   --layer-neutral-solid: #73757e;
+  --layer-neutral-soft-hover: #0f23870d;
   --layer-accent-solid: #496be8;
   --layer-accent-soft: #0a49f61c;
   --layer-overlay: #09090b7a;
@@ -101,6 +102,7 @@
   --size-input-floating-w: 240px;
   --size-input-medium: 40px;
   --size-toolbar: 56px;
+  --size-anchor-nav: 260px;
 }
 
 /* Тёмная тема макета — значения выгружены из Figma, секция
@@ -113,6 +115,7 @@
   --layer-background: #09090b;
   --layer-neutral-soft: #dbdbf11a;
   --layer-neutral-solid: #6b6c75;
+  --layer-neutral-soft-hover: #dbdbf10d;
   --layer-accent-solid: #4061e4;
   --layer-accent-soft: #344fc761;
   --layer-overlay: #00000099;

@@ -162,8 +162,11 @@
             </button>
           </div>
 
-          <!-- Контент: таблица классов -->
-          <div class="lm-content">
+          <!-- Контент: таблицы классов + панель якорной навигации -->
+          <div class="lm-content-wrap">
+          <div class="lm-content" id="content-scroll">
+            <section class="lm-anchor-section" id="anchor-nachalnaya">
+            <h2 class="t-h6 lm-anchor-section__title">Начальная школа</h2>
             <div class="lm-table">
               <div class="lm-table__head">
                 <div class="lm-table__col lm-table__col--class t-sm-medium">Название класса</div>
@@ -420,6 +423,272 @@
                 </div>
               </div>
             </div>
+            </section>
+
+            <!-- Среднее звено — доп. таблицы для скролла -->
+            <section class="lm-anchor-section" id="anchor-srednee">
+              <h2 class="t-h6 lm-anchor-section__title">Среднее звено</h2>
+              <div class="lm-table">
+                <div class="lm-table__head">
+                  <div class="lm-table__col lm-table__col--class t-sm-medium">Название класса</div>
+                  <div class="lm-table__col lm-table__col--students t-sm-medium">Ученики</div>
+                  <div class="lm-table__col lm-table__col--actions t-sm-medium">Действия</div>
+                </div>
+                <div class="lm-row" data-anim="table-row" data-anim-label="Строка класса" data-anim-group="Таблица">
+                  <div class="lm-row__main">
+                    <div class="lm-row__col lm-row__col--class">
+                      <button type="button" class="lm-row__chevron" data-anim="row-chevron" data-anim-label="Шеврон раскрытия" data-anim-group="Таблица" aria-label="Раскрыть класс">
+                        <svg class="lm-icon" width="20" height="20"><use href="#icon-chevron-right"/></svg>
+                      </button>
+                      <span class="t-md-medium">Класс 7А</span>
+                    </div>
+                    <div class="lm-row__col lm-row__col--students t-md">24 ученика</div>
+                    <div class="lm-row__col lm-row__col--actions"></div>
+                  </div>
+                </div>
+                <div class="lm-row" data-anim="table-row" data-anim-label="Строка класса" data-anim-group="Таблица">
+                  <div class="lm-row__main">
+                    <div class="lm-row__col lm-row__col--class">
+                      <button type="button" class="lm-row__chevron" data-anim="row-chevron" data-anim-label="Шеврон раскрытия" data-anim-group="Таблица" aria-label="Раскрыть класс">
+                        <svg class="lm-icon" width="20" height="20"><use href="#icon-chevron-right"/></svg>
+                      </button>
+                      <span class="t-md-medium">Класс 7Б</span>
+                    </div>
+                    <div class="lm-row__col lm-row__col--students t-md">22 ученика</div>
+                    <div class="lm-row__col lm-row__col--actions"></div>
+                  </div>
+                </div>
+                <div class="lm-row" data-anim="table-row" data-anim-label="Строка класса" data-anim-group="Таблица">
+                  <div class="lm-row__main">
+                    <div class="lm-row__col lm-row__col--class">
+                      <button type="button" class="lm-row__chevron" data-anim="row-chevron" data-anim-label="Шеврон раскрытия" data-anim-group="Таблица" aria-label="Раскрыть класс">
+                        <svg class="lm-icon" width="20" height="20"><use href="#icon-chevron-right"/></svg>
+                      </button>
+                      <span class="t-md-medium">Класс 8А</span>
+                    </div>
+                    <div class="lm-row__col lm-row__col--students t-md">26 учеников</div>
+                    <div class="lm-row__col lm-row__col--actions"></div>
+                  </div>
+                </div>
+                <div class="lm-row" data-anim="table-row" data-anim-label="Строка класса" data-anim-group="Таблица">
+                  <div class="lm-row__main">
+                    <div class="lm-row__col lm-row__col--class">
+                      <button type="button" class="lm-row__chevron" data-anim="row-chevron" data-anim-label="Шеврон раскрытия" data-anim-group="Таблица" aria-label="Раскрыть класс">
+                        <svg class="lm-icon" width="20" height="20"><use href="#icon-chevron-right"/></svg>
+                      </button>
+                      <span class="t-md-medium">Класс 8Б</span>
+                    </div>
+                    <div class="lm-row__col lm-row__col--students t-md">28 учеников</div>
+                    <div class="lm-row__col lm-row__col--actions"></div>
+                  </div>
+                </div>
+                <div class="lm-row" data-anim="table-row" data-anim-label="Строка класса" data-anim-group="Таблица">
+                  <div class="lm-row__main">
+                    <div class="lm-row__col lm-row__col--class">
+                      <button type="button" class="lm-row__chevron" data-anim="row-chevron" data-anim-label="Шеврон раскрытия" data-anim-group="Таблица" aria-label="Раскрыть класс">
+                        <svg class="lm-icon" width="20" height="20"><use href="#icon-chevron-right"/></svg>
+                      </button>
+                      <span class="t-md-medium">Класс 9А</span>
+                    </div>
+                    <div class="lm-row__col lm-row__col--students t-md">25 учеников</div>
+                    <div class="lm-row__col lm-row__col--actions"></div>
+                  </div>
+                </div>
+                <div class="lm-row" data-anim="table-row" data-anim-label="Строка класса" data-anim-group="Таблица">
+                  <div class="lm-row__main">
+                    <div class="lm-row__col lm-row__col--class">
+                      <button type="button" class="lm-row__chevron" data-anim="row-chevron" data-anim-label="Шеврон раскрытия" data-anim-group="Таблица" aria-label="Раскрыть класс">
+                        <svg class="lm-icon" width="20" height="20"><use href="#icon-chevron-right"/></svg>
+                      </button>
+                      <span class="t-md-medium">Класс 9Б</span>
+                    </div>
+                    <div class="lm-row__col lm-row__col--students t-md">23 ученика</div>
+                    <div class="lm-row__col lm-row__col--actions"></div>
+                  </div>
+                </div>
+                <div class="lm-row" data-anim="table-row" data-anim-label="Строка класса" data-anim-group="Таблица">
+                  <div class="lm-row__main">
+                    <div class="lm-row__col lm-row__col--class">
+                      <button type="button" class="lm-row__chevron" data-anim="row-chevron" data-anim-label="Шеврон раскрытия" data-anim-group="Таблица" aria-label="Раскрыть класс">
+                        <svg class="lm-icon" width="20" height="20"><use href="#icon-chevron-right"/></svg>
+                      </button>
+                      <span class="t-md-medium">Класс 7В</span>
+                    </div>
+                    <div class="lm-row__col lm-row__col--students t-md">21 ученик</div>
+                    <div class="lm-row__col lm-row__col--actions"></div>
+                  </div>
+                </div>
+                <div class="lm-row" data-anim="table-row" data-anim-label="Строка класса" data-anim-group="Таблица">
+                  <div class="lm-row__main">
+                    <div class="lm-row__col lm-row__col--class">
+                      <button type="button" class="lm-row__chevron" data-anim="row-chevron" data-anim-label="Шеврон раскрытия" data-anim-group="Таблица" aria-label="Раскрыть класс">
+                        <svg class="lm-icon" width="20" height="20"><use href="#icon-chevron-right"/></svg>
+                      </button>
+                      <span class="t-md-medium">Класс 7Г</span>
+                    </div>
+                    <div class="lm-row__col lm-row__col--students t-md">24 ученика</div>
+                    <div class="lm-row__col lm-row__col--actions"></div>
+                  </div>
+                </div>
+                <div class="lm-row" data-anim="table-row" data-anim-label="Строка класса" data-anim-group="Таблица">
+                  <div class="lm-row__main">
+                    <div class="lm-row__col lm-row__col--class">
+                      <button type="button" class="lm-row__chevron" data-anim="row-chevron" data-anim-label="Шеврон раскрытия" data-anim-group="Таблица" aria-label="Раскрыть класс">
+                        <svg class="lm-icon" width="20" height="20"><use href="#icon-chevron-right"/></svg>
+                      </button>
+                      <span class="t-md-medium">Класс 8В</span>
+                    </div>
+                    <div class="lm-row__col lm-row__col--students t-md">27 учеников</div>
+                    <div class="lm-row__col lm-row__col--actions"></div>
+                  </div>
+                </div>
+                <div class="lm-row" data-anim="table-row" data-anim-label="Строка класса" data-anim-group="Таблица">
+                  <div class="lm-row__main">
+                    <div class="lm-row__col lm-row__col--class">
+                      <button type="button" class="lm-row__chevron" data-anim="row-chevron" data-anim-label="Шеврон раскрытия" data-anim-group="Таблица" aria-label="Раскрыть класс">
+                        <svg class="lm-icon" width="20" height="20"><use href="#icon-chevron-right"/></svg>
+                      </button>
+                      <span class="t-md-medium">Класс 8Г</span>
+                    </div>
+                    <div class="lm-row__col lm-row__col--students t-md">25 учеников</div>
+                    <div class="lm-row__col lm-row__col--actions"></div>
+                  </div>
+                </div>
+                <div class="lm-row" data-anim="table-row" data-anim-label="Строка класса" data-anim-group="Таблица">
+                  <div class="lm-row__main">
+                    <div class="lm-row__col lm-row__col--class">
+                      <button type="button" class="lm-row__chevron" data-anim="row-chevron" data-anim-label="Шеврон раскрытия" data-anim-group="Таблица" aria-label="Раскрыть класс">
+                        <svg class="lm-icon" width="20" height="20"><use href="#icon-chevron-right"/></svg>
+                      </button>
+                      <span class="t-md-medium">Класс 9В</span>
+                    </div>
+                    <div class="lm-row__col lm-row__col--students t-md">22 ученика</div>
+                    <div class="lm-row__col lm-row__col--actions"></div>
+                  </div>
+                </div>
+                <div class="lm-row" data-anim="table-row" data-anim-label="Строка класса" data-anim-group="Таблица">
+                  <div class="lm-row__main">
+                    <div class="lm-row__col lm-row__col--class">
+                      <button type="button" class="lm-row__chevron" data-anim="row-chevron" data-anim-label="Шеврон раскрытия" data-anim-group="Таблица" aria-label="Раскрыть класс">
+                        <svg class="lm-icon" width="20" height="20"><use href="#icon-chevron-right"/></svg>
+                      </button>
+                      <span class="t-md-medium">Класс 9Г</span>
+                    </div>
+                    <div class="lm-row__col lm-row__col--students t-md">26 учеников</div>
+                    <div class="lm-row__col lm-row__col--actions"></div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Старшее звено — доп. таблицы для скролла -->
+            <section class="lm-anchor-section" id="anchor-starshee">
+              <h2 class="t-h6 lm-anchor-section__title">Старшее звено</h2>
+              <div class="lm-table">
+                <div class="lm-table__head">
+                  <div class="lm-table__col lm-table__col--class t-sm-medium">Название класса</div>
+                  <div class="lm-table__col lm-table__col--students t-sm-medium">Ученики</div>
+                  <div class="lm-table__col lm-table__col--actions t-sm-medium">Действия</div>
+                </div>
+                <div class="lm-row" data-anim="table-row" data-anim-label="Строка класса" data-anim-group="Таблица">
+                  <div class="lm-row__main">
+                    <div class="lm-row__col lm-row__col--class">
+                      <button type="button" class="lm-row__chevron" data-anim="row-chevron" data-anim-label="Шеврон раскрытия" data-anim-group="Таблица" aria-label="Раскрыть класс">
+                        <svg class="lm-icon" width="20" height="20"><use href="#icon-chevron-right"/></svg>
+                      </button>
+                      <span class="t-md-medium">Класс 10А</span>
+                    </div>
+                    <div class="lm-row__col lm-row__col--students t-md">18 учеников</div>
+                    <div class="lm-row__col lm-row__col--actions"></div>
+                  </div>
+                </div>
+                <div class="lm-row" data-anim="table-row" data-anim-label="Строка класса" data-anim-group="Таблица">
+                  <div class="lm-row__main">
+                    <div class="lm-row__col lm-row__col--class">
+                      <button type="button" class="lm-row__chevron" data-anim="row-chevron" data-anim-label="Шеврон раскрытия" data-anim-group="Таблица" aria-label="Раскрыть класс">
+                        <svg class="lm-icon" width="20" height="20"><use href="#icon-chevron-right"/></svg>
+                      </button>
+                      <span class="t-md-medium">Класс 10Б</span>
+                    </div>
+                    <div class="lm-row__col lm-row__col--students t-md">20 учеников</div>
+                    <div class="lm-row__col lm-row__col--actions"></div>
+                  </div>
+                </div>
+                <div class="lm-row" data-anim="table-row" data-anim-label="Строка класса" data-anim-group="Таблица">
+                  <div class="lm-row__main">
+                    <div class="lm-row__col lm-row__col--class">
+                      <button type="button" class="lm-row__chevron" data-anim="row-chevron" data-anim-label="Шеврон раскрытия" data-anim-group="Таблица" aria-label="Раскрыть класс">
+                        <svg class="lm-icon" width="20" height="20"><use href="#icon-chevron-right"/></svg>
+                      </button>
+                      <span class="t-md-medium">Класс 11А</span>
+                    </div>
+                    <div class="lm-row__col lm-row__col--students t-md">19 учеников</div>
+                    <div class="lm-row__col lm-row__col--actions"></div>
+                  </div>
+                </div>
+                <div class="lm-row" data-anim="table-row" data-anim-label="Строка класса" data-anim-group="Таблица">
+                  <div class="lm-row__main">
+                    <div class="lm-row__col lm-row__col--class">
+                      <button type="button" class="lm-row__chevron" data-anim="row-chevron" data-anim-label="Шеврон раскрытия" data-anim-group="Таблица" aria-label="Раскрыть класс">
+                        <svg class="lm-icon" width="20" height="20"><use href="#icon-chevron-right"/></svg>
+                      </button>
+                      <span class="t-md-medium">Класс 11Б</span>
+                    </div>
+                    <div class="lm-row__col lm-row__col--students t-md">17 учеников</div>
+                    <div class="lm-row__col lm-row__col--actions"></div>
+                  </div>
+                </div>
+                <div class="lm-row" data-anim="table-row" data-anim-label="Строка класса" data-anim-group="Таблица">
+                  <div class="lm-row__main">
+                    <div class="lm-row__col lm-row__col--class">
+                      <button type="button" class="lm-row__chevron" data-anim="row-chevron" data-anim-label="Шеврон раскрытия" data-anim-group="Таблица" aria-label="Раскрыть класс">
+                        <svg class="lm-icon" width="20" height="20"><use href="#icon-chevron-right"/></svg>
+                      </button>
+                      <span class="t-md-medium">Класс 10В</span>
+                    </div>
+                    <div class="lm-row__col lm-row__col--students t-md">16 учеников</div>
+                    <div class="lm-row__col lm-row__col--actions"></div>
+                  </div>
+                </div>
+                <div class="lm-row" data-anim="table-row" data-anim-label="Строка класса" data-anim-group="Таблица">
+                  <div class="lm-row__main">
+                    <div class="lm-row__col lm-row__col--class">
+                      <button type="button" class="lm-row__chevron" data-anim="row-chevron" data-anim-label="Шеврон раскрытия" data-anim-group="Таблица" aria-label="Раскрыть класс">
+                        <svg class="lm-icon" width="20" height="20"><use href="#icon-chevron-right"/></svg>
+                      </button>
+                      <span class="t-md-medium">Класс 10Г</span>
+                    </div>
+                    <div class="lm-row__col lm-row__col--students t-md">15 учеников</div>
+                    <div class="lm-row__col lm-row__col--actions"></div>
+                  </div>
+                </div>
+                <div class="lm-row" data-anim="table-row" data-anim-label="Строка класса" data-anim-group="Таблица">
+                  <div class="lm-row__main">
+                    <div class="lm-row__col lm-row__col--class">
+                      <button type="button" class="lm-row__chevron" data-anim="row-chevron" data-anim-label="Шеврон раскрытия" data-anim-group="Таблица" aria-label="Раскрыть класс">
+                        <svg class="lm-icon" width="20" height="20"><use href="#icon-chevron-right"/></svg>
+                      </button>
+                      <span class="t-md-medium">Класс 11В</span>
+                    </div>
+                    <div class="lm-row__col lm-row__col--students t-md">14 учеников</div>
+                    <div class="lm-row__col lm-row__col--actions"></div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <!-- Панель якорной навигации -->
+          <nav class="lm-anchor-nav" data-anim="anchor-nav" data-anim-label="Панель якорной навигации" data-anim-group="Навигация" aria-label="Навигация по странице">
+            <div class="lm-anchor-nav__header">
+              <span class="t-md-semibold lm-anchor-nav__title">На этой странице</span>
+            </div>
+            <div class="lm-anchor-nav__list">
+              <a href="#anchor-nachalnaya" class="lm-anchor-nav__item t-sm-medium is-active" data-anchor-target="anchor-nachalnaya" data-anim="anchor-nav-item" data-anim-label="Пункт якорной навигации" data-anim-group="Навигация">Начальная школа</a>
+              <a href="#anchor-srednee" class="lm-anchor-nav__item t-sm-medium" data-anchor-target="anchor-srednee" data-anim="anchor-nav-item" data-anim-label="Пункт якорной навигации" data-anim-group="Навигация">Среднее звено</a>
+              <a href="#anchor-starshee" class="lm-anchor-nav__item t-sm-medium" data-anchor-target="anchor-starshee" data-anim="anchor-nav-item" data-anim-label="Пункт якорной навигации" data-anim-group="Навигация">Старшее звено</a>
+            </div>
+          </nav>
           </div>
         </div>
       </div>

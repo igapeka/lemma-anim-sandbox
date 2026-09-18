@@ -82,6 +82,61 @@ LS.mock = (function () {
     });
   }
 
+  /* ---------- Панель якорной навигации ---------- */
+
+  // Подсветка активного пункта следит за скроллом .lm-content (единственный
+  // скроллящийся контейнер) через IntersectionObserver по секциям; клик по
+  // пункту скроллит контейнер плавно к своей секции без прыжка всей страницы.
+  var anchorNavItems = [];
+  var anchorObserver = null;
+
+  function setActiveAnchor(id) {
+    anchorNavItems.forEach(function (item) {
+      item.classList.toggle('is-active', item.getAttribute('data-anchor-target') === id);
+    });
+  }
+
+  function initAnchorNav() {
+    var nav = q('.lm-anchor-nav');
+    var scrollEl = q('#content-scroll');
+    if (!nav || !scrollEl) return;
+    anchorNavItems = qa('.lm-anchor-nav__item', nav);
+    var sections = qa('.lm-anchor-section', scrollEl);
+    if (!sections.length) return;
+
+    var visibleRatios = {};
+    anchorObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          visibleRatios[entry.target.id] = entry.isIntersecting ? entry.intersectionRatio : 0;
+        });
+        var bestId = null;
+        var bestRatio = 0;
+        sections.forEach(function (section) {
+          var ratio = visibleRatios[section.id] || 0;
+          if (ratio > bestRatio) {
+            bestRatio = ratio;
+            bestId = section.id;
+          }
+        });
+        if (bestId) setActiveAnchor(bestId);
+      },
+      { root: scrollEl, threshold: [0, 0.25, 0.5, 0.75, 1] }
+    );
+    sections.forEach(function (section) {
+      anchorObserver.observe(section);
+    });
+  }
+
+  function scrollToAnchor(id) {
+    var scrollEl = q('#content-scroll');
+    var target = document.getElementById(id);
+    if (!scrollEl || !target) return;
+    var targetTop = target.offsetTop - scrollEl.offsetTop;
+    scrollEl.scrollTo({ top: targetTop, behavior: 'smooth' });
+    setActiveAnchor(id);
+  }
+
   /* ---------- Дропдаун организации в шапке ---------- */
 
   var orgDropdownGen = 0;
@@ -303,6 +358,13 @@ LS.mock = (function () {
       return;
     }
 
+    var anchorItem = target.closest('.lm-anchor-nav__item');
+    if (anchorItem) {
+      scrollToAnchor(anchorItem.getAttribute('data-anchor-target'));
+      e.preventDefault();
+      return;
+    }
+
     var roleEl = target.closest('[data-role]');
     if (!roleEl) return;
     var role = roleEl.getAttribute('data-role');
@@ -422,6 +484,7 @@ LS.mock = (function () {
 
     initTheme();
     initSidebarTooltip();
+    initAnchorNav();
 
     document.addEventListener('click', onClick);
     document.addEventListener('keydown', onKeydown);

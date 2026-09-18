@@ -10,10 +10,13 @@
   flex-shrink: 0;
 }
 
+/* height (не min-height): экран никогда не растягивается сверх вьюпорта,
+   иначе body начинает скроллиться сам, вместо .lm-content внутри него. */
 .lm-screen {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
   background: var(--layer-background);
 }
 
@@ -190,8 +193,67 @@
   border-bottom: 1px solid var(--border-on-layer-1);
 }
 
+/* Обёртка контента + фиксированной панели якорной навигации: только
+   .lm-content скроллится, .lm-anchor-nav остаётся на месте (не входит в
+   scroll-контейнер), поэтому ей не нужен position: sticky. */
+.lm-content-wrap {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  min-height: 0;
+  min-width: 0;
+}
+
 .lm-content {
   flex: 1;
+  min-width: 0;
   padding: var(--space-500);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-600);
   overflow: auto;
+}
+
+.lm-anchor-section__title {
+  margin-bottom: var(--space-300);
+}
+
+/* Панель якорной навигации */
+.lm-anchor-nav {
+  width: var(--size-anchor-nav);
+  flex-shrink: 0;
+  background: var(--layer-1);
+  border-left: 1px solid var(--border-on-layer-1);
+  display: flex;
+  flex-direction: column;
+}
+
+.lm-anchor-nav__header {
+  padding: var(--space-400);
+  border-bottom: 1px solid var(--border-on-layer-1);
+  background: var(--layer-1-alt);
+}
+
+.lm-anchor-nav__title {
+  color: var(--content-primary);
+}
+
+.lm-anchor-nav__list {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-200) 0;
+}
+
+.lm-anchor-nav__item {
+  padding: var(--space-150) var(--space-400);
+  color: var(--content-secondary);
+}
+
+.lm-anchor-nav__item:hover {
+  background: var(--layer-neutral-soft-hover);
+}
+
+.lm-anchor-nav__item.is-active {
+  color: var(--content-primary);
+  background: var(--layer-neutral-soft);
 }
