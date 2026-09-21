@@ -21,11 +21,6 @@ LS.registry = (function () {
     'color-border': { label: 'Цвет обводки', props: ['border-color'] },
     'shadow': { label: 'Тень', props: ['box-shadow'] },
     'blur': { label: 'Размытие', props: ['filter'], from: { filter: 'blur(4px)' } },
-    // props:[] — CSS transition не умеет анимировать scrollTop, поэтому
-    // это не настоящий transition, а маркер для UI тулбара; duration/easing
-    // слоя читает LS.anim.animateScroll и сам крутит scrollTop через
-    // requestAnimationFrame. См. anim.js.
-    'scroll-position': { label: 'Прокрутка', props: [] },
   };
 
   var easings = {
@@ -60,7 +55,6 @@ LS.registry = (function () {
     'anchor-nav': { label: 'Панель якорной навигации', group: 'Навигация', recommended: ['resize-width'] },
     'anchor-nav-toggle': { label: 'Кнопка сворачивания якорной навигации', group: 'Навигация', recommended: ['color-text'] },
     'anchor-nav-item': { label: 'Пункт якорной навигации', group: 'Навигация', recommended: ['color-bg', 'color-text'] },
-    'anchor-scroll': { label: 'Прокрутка к якорю', group: 'Навигация', recommended: ['scroll-position'] },
 
     'table-row': { label: 'Строка класса', group: 'Таблица', recommended: ['color-bg'] },
     'row-chevron': { label: 'Шеврон раскрытия', group: 'Таблица', recommended: ['rotate'] },

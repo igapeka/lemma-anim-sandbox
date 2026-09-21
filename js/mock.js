@@ -135,12 +135,15 @@ LS.mock = (function () {
     });
   }
 
+  // Нативный smooth-scroll (не через движок анимаций тулбара): браузер сам
+  // отключает его при prefers-reduced-motion — своя rAF-анимация с ручным
+  // scrollTop так не умеет без отдельной проверки matchMedia.
   function scrollToAnchor(id) {
     var scrollEl = q('#content-scroll');
     var target = document.getElementById(id);
     if (!scrollEl || !target) return;
     var targetTop = target.offsetTop - scrollEl.offsetTop;
-    LS.anim.animateScroll(scrollEl, targetTop, 'anchor-scroll');
+    scrollEl.scrollTo({ top: targetTop, behavior: 'smooth' });
     setActiveAnchor(id);
   }
 
