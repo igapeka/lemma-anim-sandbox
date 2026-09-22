@@ -261,7 +261,7 @@ LS.toolbar = (function () {
       '<div class="lm-toolbar">' +
       '<div class="lm-toolbar__bar">' +
       '<div class="lm-toolbar__segment" role="group" aria-label="Режим песочницы">' +
-      '<button type="button" class="lm-segment-btn" data-mode="pick">Выбор</button>' +
+      '<button type="button" class="lm-segment-btn" data-mode="pick" title="Alt+клик — выбрать родительский элемент (если нужная обёртка целиком занята вложенными элементами)">Выбор</button>' +
       '<button type="button" class="lm-segment-btn is-active" data-mode="view">Просмотр</button>' +
       '</div>' +
       '<div class="lm-toolbar__divider"></div>' +
@@ -315,7 +315,11 @@ LS.toolbar = (function () {
     if (!info) {
       currentAnimId = null;
       nameEl.textContent = 'Элемент не выбран';
-      groupEl.textContent = '';
+      // Подсказка про Alt только в режиме «Выбор» — вне его клик всё равно
+      // ничего не выделяет, подсказка была бы не к месту.
+      groupEl.textContent = LS.inspector.getMode() === 'pick'
+        ? 'Alt/Option+клик — выбрать родительский элемент'
+        : '';
       playBtn.disabled = true;
       panelEl.hidden = true;
       panelEl.innerHTML = '';

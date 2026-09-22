@@ -406,9 +406,36 @@
   rotate: 90deg;
 }
 
+/* По рецепту Carbon Design System (accordion): display:none↔block +
+   max-block-size:0↔fit-content + opacity, одним transition с
+   allow-discrete (движок тулбара добавляет его сам для display — см.
+   anim.js buildTransition). @starting-style — без него первый кадр после
+   display:none→block взял бы уже конечные max-block-size/opacity, минуя
+   анимацию. overflow:hidden — всегда, не переключаем на visible (в отличие
+   от Carbon), чтобы контент не «протекал» за пределы бокса, пока
+   max-block-size ещё маленький. border-top — только у открытого состояния,
+   иначе у закрытой строки будет лишняя линия поверх border-bottom самой
+   .lm-row (border контейнера не зависит от его собственного размера). */
 .lm-row__expanded {
+  display: none;
+  overflow: hidden;
+  max-block-size: 0;
+  opacity: 0;
   background: var(--layer-1-alt);
+}
+
+.lm-row.is-open .lm-row__expanded {
+  display: block;
+  max-block-size: fit-content;
+  opacity: 1;
   border-top: 1px solid var(--border-on-layer-1);
+}
+
+@starting-style {
+  .lm-row.is-open .lm-row__expanded {
+    max-block-size: 0;
+    opacity: 0;
+  }
 }
 
 .lm-row__expanded-inner {

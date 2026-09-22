@@ -13,6 +13,13 @@
   display: none !important;
 }
 
+/* Нужен, чтобы transition к keyword-размерам (max-block-size: fit-content
+   у .lm-row__expanded, components.css) реально интерполировался, а не
+   скакал мгновенно. */
+html {
+  interpolate-size: allow-keywords;
+}
+
 html,
 body {
   height: 100%;

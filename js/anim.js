@@ -26,6 +26,10 @@ LS.anim = (function () {
 
   // Собирает CSS-строку transition для одного элемента из его слоёв.
   // Длительность и задержка умножаются на текущий коэффициент замедления.
+  // 'display' — дискретное свойство (нет промежуточных значений), поэтому
+  // получает transition-behavior:allow-discrete, чтобы участвовать в
+  // transition-списке наравне с непрерывными свойствами (см. .lm-row__expanded
+  // в components.css — рецепт Carbon Design System для аккордеона).
   function buildTransition(layers) {
     var factor = timeFactor();
     var parts = [];
@@ -33,7 +37,8 @@ LS.anim = (function () {
       var def = LS.registry.transitions[layer.type];
       if (!def) return;
       def.props.forEach(function (prop) {
-        parts.push(prop + ' ' + (layer.duration * factor) + 'ms ' + layer.easing + ' ' + ((layer.delay || 0) * factor) + 'ms');
+        var behavior = prop === 'display' ? ' allow-discrete' : '';
+        parts.push(prop + ' ' + (layer.duration * factor) + 'ms ' + layer.easing + ' ' + ((layer.delay || 0) * factor) + 'ms' + behavior);
       });
     });
     return parts.join(', ');

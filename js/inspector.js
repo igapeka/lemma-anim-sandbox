@@ -54,41 +54,100 @@ LS.inspector = (function () {
     if (badgeEl) badgeEl.hidden = true;
   }
 
-  function clearHover() {
-    if (hoverEl) hoverEl.classList.remove('is-anim-hover');
-    hoverEl = null;
-    hideBadge();
-  }
+  // Alt+клик поднимает выбор к родительскому data-anim (как «выбрать
+  // родителя» в Figma/Sketch) — нужно, когда нужный элемент-обёртка
+  // (например .lm-row__expanded) внутри плотно занят более вложенными
+  // data-anim и не оставляет пикселя, по которому можно кликнуть напрямую.
+  // Повторный Alt+клик по тому же месту поднимает выбор ещё на уровень.
+  var altClimbBase = null;
+  var altClimbEl = null;
+  var altKeyDown = false;
+  // Сырой ближайший data-anim под курсором, без учёта Alt — нужен, чтобы
+  // пересчитать подсветку по нажатию/отпусканию Alt, даже если мышь не
+  // двигалась (иначе непонятно, что выберется, пока не кликнешь).
+  var hoverDeepest = null;
 
   function onCaptureClick(e) {
     if (mode !== 'pick') return;
     e.preventDefault();
     e.stopPropagation();
-    var target = e.target.closest('[data-anim]');
-    if (target) select(target);
+    var deepest = e.target.closest('[data-anim]');
+    if (!deepest) return;
+
+    if (e.altKey) {
+      if (altClimbBase !== deepest) {
+        altClimbBase = deepest;
+        altClimbEl = deepest;
+      }
+      var parent = altClimbEl.parentElement && altClimbEl.parentElement.closest('[data-anim]');
+      if (parent) altClimbEl = parent;
+      select(altClimbEl);
+      return;
+    }
+
+    altClimbBase = null;
+    altClimbEl = null;
+    select(deepest);
+  }
+
+  // Что реально подсветится при наведении — с учётом Alt: на один уровень
+  // выше сырого hoverDeepest, тем же способом, что и первый Alt+клик.
+  function hoverTarget() {
+    if (!hoverDeepest) return null;
+    if (!altKeyDown) return hoverDeepest;
+    var parent = hoverDeepest.parentElement && hoverDeepest.parentElement.closest('[data-anim]');
+    return parent || hoverDeepest;
+  }
+
+  function applyHover(target) {
+    if (target === hoverEl) return;
+    if (hoverEl) hoverEl.classList.remove('is-anim-hover');
+    hoverEl = target;
+    if (!hoverEl) {
+      hideBadge();
+      return;
+    }
+    hoverEl.classList.add('is-anim-hover');
+    showBadge(hoverEl);
   }
 
   function onMouseOver(e) {
     if (mode !== 'pick') return;
-    var target = e.target.closest('[data-anim]');
-    if (target === hoverEl) return;
-    clearHover();
-    if (!target) return;
-    hoverEl = target;
-    hoverEl.classList.add('is-anim-hover');
-    showBadge(target);
+    hoverDeepest = e.target.closest('[data-anim]');
+    applyHover(hoverTarget());
   }
 
   function onMouseOut(e) {
     if (mode !== 'pick') return;
     var related = e.relatedTarget;
-    if (related && hoverEl && hoverEl.contains(related)) return;
-    clearHover();
+    if (related && hoverDeepest && hoverDeepest.contains(related)) return;
+    hoverDeepest = null;
+    applyHover(null);
   }
 
   function onKeydown(e) {
     if (e.key === 'Escape' && mode === 'pick' && selectedEl) {
       deselect();
+    }
+    if (e.key === 'Alt' && mode === 'pick' && !altKeyDown) {
+      altKeyDown = true;
+      applyHover(hoverTarget());
+    }
+  }
+
+  function onKeyup(e) {
+    if (e.key === 'Alt' && altKeyDown) {
+      altKeyDown = false;
+      applyHover(hoverTarget());
+    }
+  }
+
+  // Alt+Tab/переключение окна с зажатым Alt не даёт keyup — без этого
+  // подсветка застряла бы в «поднятом» состоянии после возврата на страницу.
+  function onWindowBlur() {
+    if (altKeyDown) {
+      altKeyDown = false;
+      applyHover(hoverTarget());
     }
   }
 
@@ -96,9 +155,16 @@ LS.inspector = (function () {
     mode = newMode;
     mock.classList.toggle('is-picking', mode === 'pick');
     if (mode !== 'pick') {
-      clearHover();
+      hoverDeepest = null;
+      applyHover(null);
       deselect();
+      altClimbBase = null;
+      altClimbEl = null;
       if (LS.mock && LS.mock.hideSidebarTooltip) LS.mock.hideSidebarTooltip();
+    } else if (!selectedEl) {
+      // Подсказка про Alt в тулбаре зависит от текущего режима — обновляем
+      // её и при входе в «Выбор», а не только при выходе из него.
+      LS.toolbar.setSelected(null);
     }
   }
 
@@ -153,6 +219,8 @@ LS.inspector = (function () {
     mock.addEventListener('mouseover', onMouseOver);
     mock.addEventListener('mouseout', onMouseOut);
     document.addEventListener('keydown', onKeydown);
+    document.addEventListener('keyup', onKeyup);
+    window.addEventListener('blur', onWindowBlur);
   }
 
   function getMode() {

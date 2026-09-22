@@ -15,6 +15,10 @@ LS.registry = (function () {
     'scale': { label: 'Масштаб', props: ['scale'], from: { scale: SCALE_FROM } },
     'rotate': { label: 'Поворот', props: ['rotate'], from: { rotate: '-180deg' } },
     'resize-width': { label: 'Изменение ширины', props: ['width'] },
+    // Одной длительностью/кривой три свойства сразу (как transition:all
+    // у Carbon accordion) — display нужен только ради allow-discrete
+    // (см. anim.js buildTransition), сам по себе он не «анимируется».
+    'resize-height': { label: 'Изменение высоты', props: ['display', 'max-block-size', 'opacity'] },
     'resize-font': { label: 'Размер текста', props: ['font-size'] },
     'color-bg': { label: 'Цвет фона', props: ['background-color'] },
     'color-text': { label: 'Цвет текста', props: ['color'] },
@@ -58,7 +62,7 @@ LS.registry = (function () {
 
     'table-row': { label: 'Строка класса', group: 'Таблица', recommended: ['color-bg'] },
     'row-chevron': { label: 'Шеврон раскрытия', group: 'Таблица', recommended: ['rotate'] },
-    'row-expanded': { label: 'Раскрывающийся блок класса', group: 'Таблица', recommended: ['fade'] },
+    'row-expanded': { label: 'Раскрывающийся блок класса', group: 'Таблица', recommended: ['resize-height'] },
     'student-row': { label: 'Строка ученика', group: 'Таблица', recommended: ['fade', 'slide-up'], mountControlled: true },
     'student-row-actions': { label: 'Кнопки в строке ученика', group: 'Таблица', recommended: ['fade'] },
     'inline-edit-row': { label: 'Строка встроенного добавления', group: 'Таблица', recommended: ['fade', 'slide-up'], mountControlled: true },

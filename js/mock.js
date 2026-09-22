@@ -23,8 +23,9 @@ LS.mock = (function () {
 
   /* ---------- Строки классов: раскрытие/схлопывание ---------- */
 
-  // Раскрытие/схлопывание — просто класс is-open, без анимации высоты
-  // (JS-измерение scrollHeight не давало плавного перехода — убрано).
+  // Просто класс is-open — плавную высоту даёт grid-template-rows (0fr→1fr)
+  // на .lm-row__expanded в components.css, а не JS (JS-измерение
+  // scrollHeight не давало плавного перехода — убрано).
   function toggleRow(row) {
     var expanded = q('.lm-row__expanded', row);
     if (!expanded) return;
