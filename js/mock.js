@@ -37,9 +37,8 @@ LS.mock = (function () {
   function toggleSidebar() {
     var sidebar = q('.lm-sidebar');
     var collapsed = sidebar.classList.toggle('is-collapsed');
-    var icon = q('#sidebar-burger-icon');
+    LS.anim.apply('sidebar-burger-icon');
     var btn = q('#sidebar-burger');
-    if (icon) icon.setAttribute('href', collapsed ? '#icon-sidebar-expand' : '#icon-sidebar-collapse');
     if (btn) btn.setAttribute('aria-label', collapsed ? 'Развернуть сайдбар' : 'Свернуть сайдбар');
   }
 

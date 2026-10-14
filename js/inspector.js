@@ -181,14 +181,33 @@ LS.inspector = (function () {
   function flipClass(el, className, duration) {
     if (!el) return;
     el.classList.toggle(className);
+    if (el.matches('.lm-sidebar')) LS.anim.apply('sidebar-burger-icon');
     setTimeout(function () {
       el.classList.toggle(className);
+      if (el.matches('.lm-sidebar')) LS.anim.apply('sidebar-burger-icon');
     }, duration || 400);
   }
 
   function playSelected() {
     if (!selectedEl) return;
     var animId = selectedEl.getAttribute('data-anim');
+
+    if (animId === 'sidebar-burger-icon' && (!hasEnterCapableLayer(animId) ||
+        LS.state.getLayers(animId).some(function (layer) {
+          return layer.type === 'flip-horizontal' || layer.type === 'flip-vertical';
+        }))) {
+      var duration = LS.state.getLayers(animId).reduce(function (max, layer) {
+        return Math.max(max, (layer.duration || 0) + (layer.delay || 0));
+      }, 400) * LS.anim.getTimeFactor();
+      var sidebar = selectedEl.closest('.lm-sidebar');
+      sidebar.classList.toggle('is-collapsed');
+      LS.anim.apply(animId);
+      setTimeout(function () {
+        sidebar.classList.toggle('is-collapsed');
+        LS.anim.apply(animId);
+      }, duration);
+      return;
+    }
 
     if (hasEnterCapableLayer(animId)) {
       LS.anim.enter(selectedEl);

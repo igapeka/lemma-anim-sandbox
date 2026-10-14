@@ -53,6 +53,15 @@ LS.anim = (function () {
     var css = layers.length ? buildTransition(layers) : 'none';
     document.querySelectorAll('[data-anim="' + animId + '"]').forEach(function (el) {
       el.style.transition = css;
+      if (animId === 'sidebar-burger-icon') {
+        var reflection = layers.find(function (layer) {
+          return layer.type === 'flip-horizontal' || layer.type === 'flip-vertical';
+        });
+        var collapsed = el.closest('.lm-sidebar').classList.contains('is-collapsed');
+        el.style.scale = collapsed
+          ? (reflection ? LS.registry.transitions[reflection.type].from.scale : '-1 1')
+          : '1 1';
+      }
     });
   }
 

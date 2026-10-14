@@ -38,7 +38,13 @@ LS.toolbar = (function () {
   function usedTypes(layers, excludeIndex) {
     var set = {};
     layers.forEach(function (l, i) {
-      if (i !== excludeIndex) set[l.type] = true;
+      if (i !== excludeIndex) {
+        set[l.type] = true;
+        // Масштаб и отражения управляют одним CSS-свойством scale.
+        if (l.type === 'scale' || l.type === 'flip-horizontal' || l.type === 'flip-vertical') {
+          set.scale = set['flip-horizontal'] = set['flip-vertical'] = true;
+        }
+      }
     });
     return set;
   }
@@ -171,8 +177,7 @@ LS.toolbar = (function () {
 
   function addLayer(animId, getLayers, setLayers, onDone) {
     var current = getLayers(animId);
-    var used = {};
-    current.forEach(function (l) { used[l.type] = true; });
+    var used = usedTypes(current, -1);
     var availableType = Object.keys(LS.registry.transitions).filter(function (t) {
       return !used[t];
     })[0];

@@ -1,0 +1,5 @@
+/* Центр отражения не зависит от геометрии SVG-контура. */
+[data-anim="sidebar-burger-icon"] {
+  transform-box: view-box;
+  transform-origin: center;
+}

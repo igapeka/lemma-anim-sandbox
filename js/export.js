@@ -52,6 +52,14 @@ LS.export = (function () {
         var transitionLines = transitionLinesFor(stored.layers || []);
         if (!transitionLines.length) return;
         blocks.push(cssBlock(group + ' — ' + def.label, animId, transitionLines));
+        if (animId === 'sidebar-burger-icon') {
+          var reflection = (stored.layers || []).find(function (layer) {
+            return layer.type === 'flip-horizontal' || layer.type === 'flip-vertical';
+          });
+          var reflectedScale = reflection ? LS.registry.transitions[reflection.type].from.scale : '-1 1';
+          blocks.push('[data-anim="sidebar-burger-icon"] {\n  transform-box: view-box;\n  transform-origin: center;\n  scale: 1 1;\n}\n' +
+            '.lm-sidebar.is-collapsed [data-anim="sidebar-burger-icon"] {\n  scale: ' + reflectedScale + ';\n}');
+        }
       });
     });
     return blocks.join('\n\n');

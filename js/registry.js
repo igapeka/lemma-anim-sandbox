@@ -13,6 +13,8 @@ LS.registry = (function () {
     'slide-right': { label: 'Сдвиг слева направо', props: ['translate'], from: { translate: '-' + SHIFT + ' 0' } },
     'slide-in-right': { label: 'Выезд справа (панель)', props: ['translate'], from: { translate: '100% 0' } },
     'scale': { label: 'Масштаб', props: ['scale'], from: { scale: SCALE_FROM } },
+    'flip-horizontal': { label: 'Отражение по горизонтали', props: ['scale'], from: { scale: '-1 1' } },
+    'flip-vertical': { label: 'Отражение по вертикали', props: ['scale'], from: { scale: '1 -1' } },
     'rotate': { label: 'Поворот', props: ['rotate'], from: { rotate: '-180deg' } },
     'resize-width': { label: 'Изменение ширины', props: ['width'] },
     // Одной длительностью/кривой три свойства сразу (как transition:all
@@ -49,6 +51,7 @@ LS.registry = (function () {
     'sidebar': { label: 'Сайдбар', group: 'Навигация', recommended: ['resize-width'] },
     'sidebar-item': { label: 'Пункт сайдбара', group: 'Навигация', recommended: ['color-bg'] },
     'sidebar-item-label': { label: 'Подпись пункта сайдбара', group: 'Навигация', recommended: ['fade', 'slide-left'] },
+    'sidebar-burger-icon': { label: 'Иконка сворачивания сайдбара', group: 'Навигация', recommended: ['flip-horizontal', 'flip-vertical'] },
     'sidebar-burger': { label: 'Кнопка сворачивания сайдбара', group: 'Навигация', recommended: ['color-text'] },
     'sidebar-item-tooltip': { label: 'Тултип пункта сайдбара', group: 'Навигация', recommended: ['fade'], mountControlled: true },
     'header-tab': { label: 'Вкладка в шапке', group: 'Навигация', recommended: ['color-bg'] },
